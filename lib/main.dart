@@ -53,16 +53,16 @@ class Base extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<FootersController>(
       init: FootersController(),
-      builder: (_) => Scaffold(
+      builder: (footer) => Scaffold(
         appBar: Header(),
         body: IndexedStack(
-          index: _.currentIndex,
+          index: footer.currentIndex,
           children: routes,
         ),
-        bottomNavigationBar: Footer(),
+        bottomNavigationBar: Footer(footer),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () => Navigator.of(context).pushNamed("/posts/new"),
-          label: Text("new${_.currentIndex}"),
+          label: Text("new${footer.currentIndex}"),
           icon: Icon(Icons.add),
         ),
       ),

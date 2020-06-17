@@ -17,9 +17,6 @@ class Index extends StatelessWidget {
     print(context);
     print("</Index>");
 
-//    String _searchWord =
-//        context.select<PostsIndexState, String>((state) => state.searchWord);
-
     return GetBuilder<PostsController>(
       init: PostsController(),
       builder: (post) => Column(
@@ -74,8 +71,7 @@ class buildPosts extends StatelessWidget {
   const buildPosts(this.posts);
 
   Widget build(BuildContext context) {
-    print("rebuild:ListView");
-    print(PostsController().hittedPosts.length);
+    print("build:ListView");
     return ListView.builder(
       itemCount: posts.length,
       itemBuilder: (context, int index) {
