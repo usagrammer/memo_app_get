@@ -47,12 +47,7 @@ class Index extends StatelessWidget {
                       maxLines: 1,
                       //パスワード
                       onChanged: (text) {
-                        print("text:${text}");
-                        post.searchWord = text;
-                        print("hogege");
                         post.searchPost(text);
-                        print("fuga");
-                        print("changed:${post.searchWord}");
                         print(post.hittedPosts);
                       }),
                 ),
