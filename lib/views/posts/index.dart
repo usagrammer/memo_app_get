@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:get/get.dart';
-
-import 'package:flutter_icons/flutter_icons.dart';
-
-import 'package:memoapp2/Controllers/posts_index_state.dart';
 
 import 'package:memoapp2/controllers/posts_controller.dart';
 

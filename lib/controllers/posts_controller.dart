@@ -7,8 +7,7 @@ import '../models/post.dart';
 
 class PostsController extends GetController {
   final hittedPosts = List<String>().obs;
-  final postBox = PostBox();
-
+//  final postBox = PostBox();
   List posts = ["hoge", "fuga", "bar"];
 
   Box post_box;
@@ -20,13 +19,8 @@ class PostsController extends GetController {
   }
 
   searchPost(String searchWord) {
-    print("search!!!");
-    print("from:${posts}, by:${searchWord}");
     List result = posts.where((post) => post.contains(searchWord)).toList();
-    print("result:${result}");
-    print("before:${hittedPosts}");
     hittedPosts.assignAll(result.whereType());
-    print("after:${hittedPosts}");
     update();
   }
 }

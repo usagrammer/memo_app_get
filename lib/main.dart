@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:provider/provider.dart';
 
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'package:memoapp2/Controllers/footer_state.dart';
-import 'package:memoapp2/Controllers/posts_index_state.dart';
+import 'modules/active_record_relation.dart';
+
+import 'package:faker/faker.dart';
+import 'dart:math' as math;
 
 import 'package:memoapp2/controllers/footers_controller.dart';
 import 'package:memoapp2/controllers/posts_controller.dart';
 import 'package:get/get.dart';
+import 'boxes/post_box.dart';
 
 import 'views/partials/header.dart';
 import 'views/partials/footer.dart';
@@ -27,28 +28,9 @@ void main() async {
   await Hive.initFlutter();
   // TODO カスタムアダプターの追加
   Hive.registerAdapter(PostAdapter());
-//  var posts = await Hive.openBox('posts');
-//
-//  var add_post = Post("hoge", "fugaa", 1);
-//  posts.add(add_post);
-//  print("posts.length: ${posts.length}");
 
   final PostsController post = Get.put(PostsController());
-  await print("postBox.length: ${post.postBox.box}");
-//  Post add_post = Post("hoge", "fugaa", 1);
-  post.postBox.box.then((box) {
-    print("then");
-//    Hive.close();
-//    Hive.deleteFromDisk();
-    print(box.values);
-    print("before_box.length: ${box.length}");
-    Post new_post = Post("hoge", "fugaa", 1, 1 + box.length);
-    box.put(new_post.id, new_post);
-    print("after_box.length: ${box.length}");
-    print("box.all:${box.values}");
-    print("box.get(${new_post.id}):${box.get(new_post.id)}");
-    runApp(Init());
-  });
+  runApp(Init());
 }
 
 class Init extends StatelessWidget {
@@ -58,25 +40,28 @@ class Init extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print("<Init>");
-    print(context);
-    post.postBox.box.then((box) {
-      print("box.length_in_INIT: ${box.length}");
-      post.initializeData(box);
+//    Hive.close();
+//    Hive.deleteFromDisk();
+    var postBox = new PostBox();
+    postBox.box.then((box) {
+      var faker = new Faker();
+      var rand = new math.Random();
+      Post new_post = Post(faker.sport.name(), faker.internet.email(),
+          rand.nextInt(100), 1 + box.length);
+      box.put(new_post.id, new_post);
+      postBox.all();
+      var result = postBox.find_by(key: "id", value: 9);
+      var results = postBox.search(key: "id", value: 9);
+      print("main_box:${box}");
+      print("main_box_values:${box.values.length}");
+      print("main_box_class:${box.runtimeType}");
+      box.hogehoge();
+      var result_find = box.find(9);
     });
-    return GetMaterialApp(
-        routes: <String, WidgetBuilder>{
-          '/home': (BuildContext context) => new Base(),
-          '/posts/new': (BuildContext context) => new PostsNew()
-        },
-        home: MultiProvider(
-          providers: [
-            StateNotifierProvider<FooterStateNotifier, FooterState>(
-                create: (_) => FooterStateNotifier()),
-            StateNotifierProvider<PostsIndexStateNotifier, PostsIndexState>(
-                create: (_) => PostsIndexStateNotifier()),
-          ],
-          child: Base(),
-        ));
+    return GetMaterialApp(routes: <String, WidgetBuilder>{
+      '/home': (BuildContext context) => new Base(),
+      '/posts/new': (BuildContext context) => new PostsNew()
+    }, home: Base());
   }
 }
 

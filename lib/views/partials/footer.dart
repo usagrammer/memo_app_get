@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:memoapp2/controllers/footers_controller.dart';
-import 'package:provider/provider.dart';
-
-import 'package:memoapp2/Controllers/footer_state.dart';
 
 import 'package:get/get.dart';
 
