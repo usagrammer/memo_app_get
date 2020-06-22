@@ -55,10 +55,10 @@ class Init extends StatelessWidget {
 //      box.put(new_post.id, new_post);
 //      postBox.all();
 
-      Post result = postBox.find_by(key: "id", value: 9);
-      print("result:$result");
-      var results = postBox.search(key: "id", value: 9);
-      print("results:$results");
+//      Post result = postBox.find_by(key: "id", value: 9);
+//      print("result:$result");
+//      var results = postBox.search(key: "id", value: 9);
+//      print("results:$results");
     })();
 
     return GetMaterialApp(routes: <String, WidgetBuilder>{

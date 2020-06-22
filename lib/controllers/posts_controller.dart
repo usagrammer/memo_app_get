@@ -7,7 +7,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import '../models/post.dart';
 
 class PostsController extends GetController {
-  List<String> hittedPosts = [];
+  List hittedPosts = [];
   String searchWord = "";
   List tags = [];
   int category_id = 1;
@@ -33,8 +33,8 @@ class PostsController extends GetController {
     searchWord = newWord;
     List result =
         posts.where((post) => post.content.contains(searchWord)).toList();
-    result = result.map((post) => post.content).toList();
-    hittedPosts = result.cast<String>();
+//    result = result.map((post) => post.content);
+    hittedPosts = result;
     print("hittedPosts!!!");
     print("result:$result");
     print("hittedPosts:${hittedPosts.toList()}");

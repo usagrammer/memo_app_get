@@ -6,7 +6,7 @@ class ActiveRecord {
     return futureBox;
   }
 
-  create(id) async {
+  create() async {
     print("【create!!!】");
     print("this: $this");
     Box box = await openBox();

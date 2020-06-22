@@ -70,11 +70,15 @@ class buildPosts extends StatelessWidget {
 
   Widget build(BuildContext context) {
     print("build:ListView");
+    List<String> items =
+        posts.map((post) => post.title).toList().cast<String>();
     return ListView.builder(
-      itemCount: posts.length,
+      itemCount: items.length,
       itemBuilder: (context, int index) {
-        return MemoTile(
-            posts[index], "bar", ["hoge", "fuga"], Icon(Icons.menu));
+        print("index:${index}");
+        int indexOf = items.indexOf(items[index]);
+        return MemoTile(items[index], posts[index].content, ["hoge", "fuga"],
+            Icon(Icons.menu));
       },
       padding: const EdgeInsets.all(8),
     );
