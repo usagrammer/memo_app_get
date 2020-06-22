@@ -42,4 +42,9 @@ class PostBox extends ActiveRecordRelation {
   search({key, value}) {
     return _records.search(key: key, value: value);
   }
+
+  @override
+  pluck({key}) {
+    return _records.pluck(key: key);
+  }
 }

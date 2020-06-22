@@ -43,4 +43,12 @@ class ActiveRecordRelation {
     print("【search_result】 $results");
     return results;
   }
+
+  pluck({key}) {
+    print("【pluck】 key:$key");
+    print(objects);
+    final results = objects.map((object) => object[key]).toList();
+    print("【pluck_result】 $results");
+    return results;
+  }
 }

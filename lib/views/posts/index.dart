@@ -6,10 +6,13 @@ import 'package:memoapp2/controllers/posts_controller.dart';
 import '../partials/posts_post_tile.dart';
 
 class Index extends StatelessWidget {
+  final PostsController controller = Get.put(PostsController());
+
   @override
   Widget build(BuildContext context) {
     print("<Index>");
     print(context);
+    controller.initialize();
     print("</Index>");
 
     return GetBuilder<PostsController>(
@@ -61,7 +64,7 @@ class Index extends StatelessWidget {
 }
 
 class buildPosts extends StatelessWidget {
-  final ListX<String> posts;
+  final List posts;
 
   const buildPosts(this.posts);
 
