@@ -28,27 +28,6 @@ class Post extends ActiveRecord {
       "id": this.id
     };
   }
-
-//  static All() {
-//    print("Post.All!!!");
-//    box.then((records) {
-//      records.values.forEach((record) {
-//        print("${record.id}: ${record.content}");
-//      });
-//      return records.values;
-//    });
-//  }
-//
-//  static find_by({key, value}) {
-//    print("【find_by】 key: $key, value: $value");
-//    box.then((records) {
-//      print("aaaaaaaaaaaaaaa");
-//      print(records.toMap());
-//      print(records.values);
-//      print(records.values.first.content);
-////      records.values.firstWhere((record) => record.get("$key") == value);
-//    });
-//  }
 }
 
 /// Boxを内包するクラス

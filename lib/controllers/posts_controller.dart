@@ -8,24 +8,29 @@ import '../models/post.dart';
 
 class PostsController extends GetController {
   List<String> hittedPosts = [];
+  String searchWord = "";
+  List tags = [];
+  int category_id = 1;
 //  final postBox = PostBox();
   List posts = [];
   Box box;
-  Future<Box> futureBox = Hive.openBox('posts');
 
   initialize() async {
     print("posts_Controller:initialize");
+    Future<Box> futureBox = Hive.openBox('posts');
     box = await futureBox;
     print("posts_Controller_box:$box");
     print("posts_Controller_box_values:${box.values.toList()}");
     posts = box.values.toList();
     print("posts_Controller_posts:$posts");
     print("posts_Controller_hittedPosts:$hittedPosts");
+    searchPost(searchWord);
   }
 
-  searchPost(String searchWord) async {
+  searchPost(String newWord) async {
     print("searchword!!!");
-    print("searchWord:$searchWord");
+    print("searchWord:$newWord");
+    searchWord = newWord;
     List result =
         posts.where((post) => post.content.contains(searchWord)).toList();
     result = result.map((post) => post.content).toList();

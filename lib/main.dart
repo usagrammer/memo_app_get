@@ -50,10 +50,10 @@ class Init extends StatelessWidget {
 
       var faker = new Faker();
       var rand = new math.Random();
-      Post new_post = Post(
-          faker.sport.name(), faker.internet.email(), rand.nextInt(100), 1 + 0);
-      box.put(new_post.id, new_post);
-      postBox.all();
+//      Post new_post = Post(
+//          faker.sport.name(), faker.internet.email(), rand.nextInt(100), 1 + 0);
+//      box.put(new_post.id, new_post);
+//      postBox.all();
 
       Post result = postBox.find_by(key: "id", value: 9);
       print("result:$result");
