@@ -6,20 +6,20 @@ part 'post.g.dart';
 
 @HiveType(typeId: 1)
 class Post extends ActiveRecord {
-  @HiveField(0)
-  String title;
-  @HiveField(1)
-  String content;
-  @HiveField(2)
-  HiveList images;
-  @HiveField(3)
-  HiveList categories;
   @HiveField(4)
+  String title;
+  @HiveField(5)
+  String content;
+  @HiveField(6)
+  HiveList images;
+  @HiveField(7)
+  HiveList categories;
+  @HiveField(8)
   HiveList tags;
 
 //  static Future<Box> box = Hive.openBox<Post>('posts');
 
-  Post(this.title, this.content, this.images, this.categories, this.tags);
+  Post(this.title, this.content, [this.images, this.categories, this.tags]);
 
   toMap() {
     return {

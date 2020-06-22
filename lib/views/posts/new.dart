@@ -203,7 +203,7 @@ class PostsNew extends StatelessWidget {
                 RaisedButton(
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
-                      Post post = new Post(title, content, 1, 2);
+                      Post post = new Post(title, content);
                       await post.create();
                       Get.snackbar(
                         'Hi',

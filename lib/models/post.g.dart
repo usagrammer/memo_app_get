@@ -8,7 +8,7 @@ part of 'post.dart';
 
 class PostAdapter extends TypeAdapter<Post> {
   @override
-  final typeId = 1;
+  int typeId = 1;
 
   @override
   Post read(BinaryReader reader) {
@@ -17,24 +17,27 @@ class PostAdapter extends TypeAdapter<Post> {
       for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Post(
-      fields[0] as String,
-      fields[1] as String,
-      fields[2] as int,
-      fields[3] as int,
+      fields[4] as String,
+      fields[5] as String,
+      (fields[6] as List)?.cast<HiveObject>(),
+      (fields[7] as List)?.cast<HiveObject>(),
+      (fields[8] as List)?.cast<HiveObject>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, Post obj) {
     writer
+      ..writeByte(5)
       ..writeByte(4)
-      ..writeByte(0)
+      ..write(obj.title)
+      ..writeByte(5)
       ..write(obj.content)
-      ..writeByte(1)
-      ..write(obj.image)
-      ..writeByte(2)
-      ..write(obj.category_id)
-      ..writeByte(3)
-      ..write(obj.id);
+      ..writeByte(6)
+      ..write(obj.images)
+      ..writeByte(7)
+      ..write(obj.categories)
+      ..writeByte(8)
+      ..write(obj.tags);
   }
 }

@@ -32,7 +32,7 @@ class PostsController extends GetController {
     print("searchWord:$newWord");
     searchWord = newWord;
     List result =
-        posts.where((post) => post.content.contains(searchWord)).toList();
+        posts.where((post) => post.title.contains(searchWord)).toList();
 //    result = result.map((post) => post.content);
     hittedPosts = result;
     print("hittedPosts!!!");
