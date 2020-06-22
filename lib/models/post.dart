@@ -5,7 +5,7 @@ import 'package:memoapp2/models/active_record.dart';
 part 'post.g.dart';
 
 @HiveType(typeId: 1)
-class Post {
+class Post extends ActiveRecord {
   @HiveField(0)
   String content;
 

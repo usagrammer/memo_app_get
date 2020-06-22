@@ -42,22 +42,25 @@ class Init extends StatelessWidget {
     print("<Init>");
 //    Hive.close();
 //    Hive.deleteFromDisk();
+//    var box;
     var postBox = new PostBox();
-    postBox.box.then((box) {
+    (() async {
+      await postBox.initialize();
+      var box = postBox.box;
+
       var faker = new Faker();
       var rand = new math.Random();
-      Post new_post = Post(faker.sport.name(), faker.internet.email(),
-          rand.nextInt(100), 1 + box.length);
+      Post new_post = Post(
+          faker.sport.name(), faker.internet.email(), rand.nextInt(100), 1 + 0);
       box.put(new_post.id, new_post);
       postBox.all();
-      var result = postBox.find_by(key: "id", value: 9);
+
+      Post result = postBox.find_by(key: "id", value: 9);
+      print("result:$result");
       var results = postBox.search(key: "id", value: 9);
-      print("main_box:${box}");
-      print("main_box_values:${box.values.length}");
-      print("main_box_class:${box.runtimeType}");
-      box.hogehoge();
-      var result_find = box.find(9);
-    });
+      print("results:$results");
+    })();
+
     return GetMaterialApp(routes: <String, WidgetBuilder>{
       '/home': (BuildContext context) => new Base(),
       '/posts/new': (BuildContext context) => new PostsNew()

@@ -5,11 +5,11 @@ import 'package:memoapp2/boxes/application_box.dart';
 import '../models/application_record.dart';
 import '../modules/active_record_relation.dart';
 
-class PostBox extends ApplicationRecord {
+class PostBox extends ActiveRecordRelation {
   static var _data;
-  static Box _box;
-  static ApplicationRecord _records;
-  static Future<Box> _futureBox = Hive.openBox('posts');
+  Box box;
+  static ActiveRecordRelation _records;
+  Future<Box> futureBox = Hive.openBox('posts');
 
   factory PostBox() {
     if (_data == null) {
@@ -21,32 +21,25 @@ class PostBox extends ApplicationRecord {
 
   PostBox._internal();
 
-  static initialize() {
-    _futureBox.then((box) {
-      _box = box;
-      _records = new ApplicationRecord(_box.values);
-    });
+  initialize() async {
+    box = await futureBox;
+    print("initialize!!!");
+    print(box);
+    _records = new ActiveRecordRelation(box.values.toList());
   }
 
   @override
-  all() {
-    _futureBox.then((box) {
-      print(box);
-      _records.all();
-    });
+  all() async {
+    return _records.all();
   }
 
   @override
-  find_by(key, value) {
-    _futureBox.then((box) {
-      _records.find_by(key, value);
-    });
+  find_by({key, value}) {
+    return _records.find_by(key: key, value: value);
   }
 
   @override
-  search(key, value) {
-    _futureBox.then((box) {
-      _records.search(key, value);
-    });
+  search({key, value}) {
+    return _records.search(key: key, value: value);
   }
 }
